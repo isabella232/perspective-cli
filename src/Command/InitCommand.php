@@ -98,17 +98,8 @@ class InitCommand extends Command
                 [
                     'name'         => $systemName,
                     'description'  => $systemName,
-                    'repositories' => [
-                        [
-                            'type'    => 'path',
-                            'url'     => '../PerspectiveSimulator',
-                            'options' => [
-                                'symlink' => false,
-                            ],
-                        ],
-                    ],
                     'require'      => [
-                        'Perspective/Simulator' => '@dev',
+                        'perspective/simulator' => 'dev-master',
                     ],
                 ],
                 128
@@ -147,8 +138,8 @@ class InitCommand extends Command
 
         chdir($systemDir);
         exec('composer install');
-        if (is_dir('./vendor/Perspective/Simulator') === true) {
-            exec('php ./vendor/Perspective/Simulator/src/CLI/bin/perspective.php -i');
+        if (is_dir('./vendor/perspective/simulator') === true) {
+            exec('./vendor/bin/perspective simulator:install');
         }
 
         $output->writeln([
