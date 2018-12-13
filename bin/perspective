@@ -24,7 +24,7 @@ include_once dirname(__DIR__, 3).'/autoload.php';
 $runner = new \PerspectiveCLI\Runner();
 
 // Workout the current project and if the simulator is installed so we can run our actions.
-$simPath      = '/vendor/Perspective/Simulator';
+$simPath      = '/vendor/perspective/simulator';
 $cwd          = getcwd();
 $proot        = $cwd;
 $project      = null;
@@ -45,8 +45,8 @@ while (file_exists($proot.$simPath) === false) {
 
 }
 
-if (file_exists($proot.'/vendor/Perspective/Simulator/src/CLI/Commands.php') === true) {
-    include $proot.'/vendor/Perspective/Simulator/src/CLI/Commands.php';
+if (file_exists($proot.'/vendor/perspective/simulator/src/CLI/Commands.php') === true) {
+    include $proot.'/vendor/perspective/simulator/src/CLI/Commands.php';
 }
 
 $runner->run();
