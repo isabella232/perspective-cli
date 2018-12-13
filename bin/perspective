@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Perspective command for the perspective simulator
+ *
+ * @package    Perspective
+ * @subpackage Simulator
+ * @author     Squiz Pty Ltd <products@squiz.net>
+ * @copyright  2018 Squiz Pty Ltd (ABN 77 084 670 600)
+ */
+
+// Prepare script for cli run.
+if (php_sapi_name() !== 'cli') {
+    echo "This script must be run from the command line.\n";
+    exit(1);
+}
+
+error_reporting(E_ALL | E_STRICT);
+ini_set('default_charset', 'UTF-8');
+mb_internal_encoding('UTF-8');
+
+include_once dirname(__DIR__, 3).'/autoload.php';
+
+$runner = new \PerspectiveCLI\Runner();
+
+// Workout the current project and if the simulator is installed so we can run our actions.
+$simPath      = '/vendor/Perspective/Simulator';
+$cwd          = getcwd();
+$proot        = $cwd;
+$project      = null;
+$prevBasename = null;
+while (file_exists($proot.$simPath) === false) {
+    if ($project === null) {
+        $prevBasename = basename($proot);
+    }
+
+    $proot = dirname($proot);
+    if ($proot === '/') {
+        break;
+    }
+
+    if (basename($proot) === 'projects' && $project === null) {
+        $project = $prevBasename;
+    }
+
+}
+
+if (file_exists($proot.'/vendor/Perspective/Simulator/src/CLI/Commands.php') === true) {
+    include $proot.'/vendor/Perspective/Simulator/src/CLI/Commands.php';
+}
+
+$runner->run();

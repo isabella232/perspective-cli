@@ -1,0 +1,12 @@
+{
+    "name": "Perspective/CLI",
+    "description": "Perspective CLI.",
+    "autoload": {
+        "psr-4": {"PerspectiveCLI\\": "src/"}
+    },
+    "require": {
+        "php": ">=7.1.3",
+        "symfony/console": "^4.2"
+    },
+    "bin": ["./bin/perspective"]
+}
