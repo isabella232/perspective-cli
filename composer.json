@@ -1,6 +1,6 @@
 {
-    "name": "Perspective/CLI",
-    "description": "Perspective CLI.",
+    "name": "perspective/cli",
+    "description": "Perspective CLI tool for local development",
     "autoload": {
         "psr-4": {"PerspectiveCLI\\": "src/"}
     },
