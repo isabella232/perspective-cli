@@ -27,9 +27,11 @@ class Runner
     /**
      * Construct function for CLI runner.
      *
+     * @param boolean $canInit Flag to register the initi command or not.
+     *
      * @return void
      */
-    final public function __construct()
+    final public function __construct(bool $canInit)
     {
         // Create a new CLI application.
         $this->app = new \Symfony\Component\Console\Application('Perspective CLI Runner', '1.0.0');
@@ -44,8 +46,11 @@ class Runner
                 null
             )
         ]);
-        // Register the CLI Runner specific commands.
-        $this->app->add(new \PerspectiveCLI\Command\InitCommand());
+
+        if ($canInit === true) {
+            // Register the CLI Runner specific commands.
+            $this->app->add(new \PerspectiveCLI\Command\InitCommand());
+        }
 
     }//end __construct()
 
