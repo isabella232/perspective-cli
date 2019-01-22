@@ -57,11 +57,8 @@ class InitCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln([
-            'Project Creator',
-            '================================================',
-            '',
-        ]);
+        $style = new \Symfony\Component\Console\Style\SymfonyStyle($input, $output);
+        $style->title('Project Creator');
 
         $systemName = str_replace(' ', '_', $input->getArgument('name'));
         $systemName = str_replace('-', '_', $systemName);
@@ -89,7 +86,8 @@ class InitCommand extends Command
         $gitignore = $systemDir.'/.gitignore';
         file_put_contents($gitignore, '/simulator/
     /vendor/
-    composer.lock');
+    composer.lock
+    .apiKey');
 
         $composer = $systemDir.'/composer.json';
         file_put_contents(
@@ -142,12 +140,7 @@ class InitCommand extends Command
             exec('./vendor/bin/perspective simulator:install');
         }
 
-        $output->writeln([
-            '================================================',
-            '',
-            'New project created at '.getcwd(),
-            '',
-        ]);
+        $stlye->write('New project created at .'getcwd(), true);
 
     }//end execute()
 
