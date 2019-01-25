@@ -140,7 +140,7 @@ class InitCommand extends Command
             exec('./vendor/bin/perspective simulator:install');
         }
 
-        $stlye->write('New project created at .'getcwd(), true);
+        $stlye->write('New project created at '.getcwd(), true);
 
     }//end execute()
 
