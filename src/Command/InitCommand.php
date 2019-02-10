@@ -131,7 +131,7 @@ class InitCommand extends Command
         exec('git -C '.$systemDir.' init');
         if (empty($input->getArgument('repo-url')) === false) {
             // Repo url set so lets initialise it.
-            exec('git -C '.$systemDir. ' remote add origin '.$opts['repo-url']);
+            exec('git -C '.$systemDir. ' remote add origin '.$input->getArgument('repo-url'));
         }
 
         chdir($systemDir);
@@ -140,7 +140,7 @@ class InitCommand extends Command
             exec('./vendor/bin/perspective simulator:install');
         }
 
-        $stlye->write('New project created at '.getcwd(), true);
+        $style->write('New project created at '.getcwd(), true);
 
     }//end execute()
 
